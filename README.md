@@ -39,5 +39,5 @@ import Waterfall from 'rc-waterfall';
 | source | 图片资源列表 | array<string> | - | - |
 | columnWidth | 单列宽度【单位px】 | number | 210 | - |
 | isOnlyImg | 是否只根据图片高度进行排版 | boolean | false | true,false |
-| renderItem | 渲染瀑布流块元素,回调参数【ci:列中位置,si:source中位置,url:图片url】 | function(ci:number,si:number,url:string):ReactNode | (ci,si,url)=>`<img src={url}/>` | - |
+| renderItem | 渲染瀑布流块元素,回调参数【图片在列中位置ci:number,图片在source中位置si:number,图片url:string】 | function(ci,si,url):ReactNode | (ci,si,url)=>`<img src={url}/>` | - |
 | getTarget | 设置需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 | function():HTMLElement | ()=>window | - |
