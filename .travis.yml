@@ -10,7 +10,7 @@ script:
   - git init
   - git add -A
   - git commit -m "Deploy GH"
-  - git push -u https://$GH_TOKEN@github.com/liujian10/v-drawer.git HEAD:gh-pages --force
+  - git push -u https://$GH_TOKEN@github.com/liujian10/rc-waterfall.git HEAD:gh-pages --force
 cache:
   directories:
     - node_modules
