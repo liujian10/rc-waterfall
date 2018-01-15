@@ -7,6 +7,10 @@
 
 [![rc-waterfall](https://nodei.co/npm/rc-waterfall.png)](https://npmjs.org/package/rc-waterfall)
 
+## Ideas
+
+
+
 ## Development
 
 ```bash
@@ -26,10 +30,45 @@ local: http://localhost:3002/
 
 online: http://mapleliu.com/rc-waterfall/
 
+## Ideas
+
+### 初始化
+* 通过列宽【columnWidth】与容器【父级元素】宽度算出可显示列数columnNum，生成对应数量的列元素列表columns，且每列有一个图片元素【如果图片数量足够】
+* 执行图片缓存与添加图片元素操作
+
+### 添加图片元素操作【图片元素实际指renderItem方法返回的ReactDom元素】
+* 判断如果需要添加图片元素，查找最短列并添加图片元素，执行完成后，继续执行添加图片元素操作
+* 判断如果不需要添加图片元素，操作停止
+
+### 查找最短列
+* 如果根据图片高度排版【isOnlyImg:true】，图片缓存完成后会被添加到一个虚拟dom列表domColumns中，根据domColumns中各列的图片高度和查找最短列
+* 如果根据实际元素高度排版【isOnlyImg:false】，列元素渲染完成后的dom元素会被添加domColumns中，根据domColumns中各列dom元素的实际高度查找最短列
+
+### 执行添加图片元素时机
+* 初始化完成
+* 上一次添加图片元素渲染完成后
+* getTarget返回的dom滚动条监听事件触发时
+
+### 判断是否需要添加图片元素
+* 图片是否已用完
+* 图片元素是否已渲染到指定位置
+
+### 优化处理
+* 图片提前缓存，提示滚动时的流畅度
+* 图片元素渲染时shouldComponentUpdate中判断是否需要重新渲染，避免重复渲染
+
 ## Usage [demo](./demo/Demo.js)
 
 ```js
 import Waterfall from 'rc-waterfall';
+...
+<Waterfall
+    source = {[...]}
+    columnWidth = {200}
+    isOnlyImg
+    renderItem = (ci,si,url)=><div><img src={url}/><h4>{si}</h4></div>
+    getTarget = ()=>window
+/>
 ```
 
 ## API
