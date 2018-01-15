@@ -1,60 +1,65 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require('path');
-const config = require('../config');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const config = require('../config')
+
+const inProject = path.resolve.bind(path, __dirname)
+const inProjectSrc = (file) => inProject('src', file)
+const NODE_ENV = process.env.NODE_ENV || config.dev.env.NODE_ENV
+const __DEV__ = NODE_ENV.env === config.dev.env.NODE_ENV
+const __SOURCE_MAP__ = config.dev.cssSourceMap
+
+exports.extractStyles = new ExtractTextPlugin({
+  filename: 'styles/[name].[contenthash].css',
+  allChunks: true,
+  disable: __DEV__
+})
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
-    : config.dev.assetsSubDirectory;
-  return path.posix.join(assetsSubDirectory, _path);
-};
+    : config.dev.assetsSubDirectory
+  return path.posix.join(assetsSubDirectory, _path)
+}
 
-exports.cssLoaders = function (options) {
-  options = options || {};
-
-  // generate loader string to be used with extract text plugin
-  function generateLoaders(loaders) {
-    let sourceLoader = loaders.map(function (loader) {
-      let extraParamChar;
-      if (/\?/.test(loader)) {
-        loader = loader.replace(/\?/, '-loader?');
-        extraParamChar = '&'
-      } else {
-        loader = loader + '-loader';
-        extraParamChar = '?'
-      }
-      return loader + (options.sourceMap ? extraParamChar + 'sourceMap' : '')
-    }).join('!');
-
-    if (options.extract) {
-      return ExtractTextPlugin.extract('style-loader', sourceLoader)
-    } else {
-      return ['style-loader', sourceLoader].join('!')
-    }
-  }
-
-  // http://vuejs.github.io/vue-loader/configurations/extract-css.html
-  return {
-    css: generateLoaders(['css']),
-    postcss: generateLoaders(['css']),
-    less: generateLoaders(['css', 'less']),
-    sass: generateLoaders(['css', 'sass?indentedSyntax']),
-    scss: generateLoaders(['css', 'sass']),
-    stylus: generateLoaders(['css', 'stylus']),
-    styl: generateLoaders(['css', 'stylus'])
-  }
-};
-
-// Generate loaders for standalone style files (outside of .vue)
-exports.styleLoaders = function (options) {
-  let output = [];
-  let loaders = exports.cssLoaders(options);
-  for (let extension in loaders) {
-    let loader = loaders[extension];
-    output.push({
-      test: new RegExp('\\.' + extension + '$'),
-      loader: loader
+exports.cssRules = [
+  {
+    test: /\.css$/,
+    loader: 'css-loader'
+  }, {
+    test: /\.less$/,
+    loader: exports.extractStyles.extract({
+      fallback: 'style-loader',
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: __SOURCE_MAP__,
+            minimize: {
+              autoprefixer: {
+                add: true,
+                remove: true,
+                browsers: ['last 2 versions']
+              },
+              discardComments: {
+                removeAll: true
+              },
+              discardUnused: false,
+              mergeIdents: false,
+              reduceIdents: false,
+              safe: true,
+              sourcemap: __SOURCE_MAP__
+            }
+          }
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            sourceMap: __SOURCE_MAP__,
+            includePaths: [
+              inProjectSrc('styles')
+            ]
+          }
+        }
+      ]
     })
-  }
-  return output
-};
+  }]

@@ -26,7 +26,7 @@ local: http://localhost:3002/
 
 online: http://mapleliu.com/rc-waterfall/
 
-## Usage [demo](https://github.com/liujian10/rc-waterfall/demo/Demo.js)
+## Usage [demo](./demo/Demo.js)
 
 ```js
 import Waterfall from 'rc-waterfall';

@@ -1,5 +1,4 @@
 const config = require('./index');
-const utils = require('../build/utils');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
@@ -10,9 +9,6 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 });
 
 module.exports = merge(baseWebpackConfig, {
-  module: {
-    loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
-  },
   // eval-source-map is faster for development
   devtool: '#eval-source-map',
   plugins: [
