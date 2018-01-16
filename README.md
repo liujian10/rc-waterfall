@@ -36,8 +36,8 @@ import Waterfall from 'rc-waterfall';
     source = {[...]}
     columnWidth = {200}
     isOnlyImg
-    renderItem = (ci,si,url)=><div><img src={url}/><h4>{si}</h4></div>
-    getTarget = ()=>window
+    renderItem = {(ci,si,url)=><div><img src={url}/><h4>{si}</h4></div>}
+    getTarget = {()=>window}
 />
 ```
 
@@ -71,9 +71,9 @@ import Waterfall from 'rc-waterfall';
 * getTarget返回的dom滚动条监听事件触发时
 
 ### 判断是否需要添加图片元素
-* 图片是否已用完
+* 图片是否已全部加载完
 * 图片元素是否已渲染到指定位置
 
 ### 优化处理
-* 图片提前缓存，提示滚动时的流畅度
-* 图片元素渲染时shouldComponentUpdate中判断是否需要重新渲染，避免重复渲染
+* 图片提前缓存，提升滚动时的流畅度
+* 优化shouldComponentUpdate，避免重复渲染

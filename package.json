@@ -1,6 +1,6 @@
 {
   "name": "rc-waterfall",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Waterfall component for React",
   "scripts": {
     "dev": "node build/dev",
