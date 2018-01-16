@@ -38,8 +38,8 @@ class Demo extends React.Component {
     }
 
     return (
-      <div style={{textAlign: 'center',padding:'20px'}}>
-        <h1>Demo of rc-water</h1>
+      <div style={{textAlign: 'center', padding: '20px'}}>
+        <h1>Demo of rc-waterfall</h1>
         <Waterfall {...waterFallProps} />
         <h1>The End</h1>
       </div>
