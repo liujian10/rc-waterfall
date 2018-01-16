@@ -3,7 +3,7 @@
   "version": "1.0.8",
   "description": "Waterfall component for React",
   "scripts": {
-    "start": "node build/dev",
+    "dev": "node build/dev",
     "build": "node build/build",
     "compile": "rc-tools run compile --babel-runtime",
     "test": "echo \"Error: no test specified\" && exit 1",
