@@ -1,8 +1,8 @@
 // base config
 
-const path = require('path');
-const config = require('./index');
-const utils = require('../build/utils');
+const path = require('path')
+const config = require('./index')
+const utils = require('../build/utils')
 
 let webpackConfig = {
   entry: {
@@ -13,11 +13,17 @@ let webpackConfig = {
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
+  resolve: {
+    // root: paths.client(),
+    extensions: ['.js', '.jsx', '.json'],
+    modules: [path.join(__dirname, '../node_modules'), 'node_modules'],
+    enforceExtension: false
+  },
   module: {
     rules: []
   },
-  plugins:[]
-};
+  plugins: []
+}
 
 webpackConfig.module.rules.push({
   test: /\.(js|jsx)$/,
@@ -65,9 +71,9 @@ webpackConfig.module.rules.push({
         ]
       }
     }]
-});
+})
 
-webpackConfig.module.rules.push(...utils.cssRules);
-webpackConfig.plugins.push(utils.extractStyles);
+webpackConfig.module.rules.push(...utils.cssRules)
+webpackConfig.plugins.push(utils.extractStyles)
 
-module.exports = webpackConfig;
+module.exports = webpackConfig

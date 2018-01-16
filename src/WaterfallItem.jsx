@@ -7,16 +7,8 @@ class WaterfallItem extends React.Component {
     this.state = {}
   }
 
-  componentDidMount () {
-//    console.log('componentDidMount:waterfall-item-' + this.props.index);
-  }
-
   shouldComponentUpdate (newProps) {
     return this.props.index !== newProps.index
-  }
-
-  componentDidUpdate () {
-//    console.log('componentDidUpdate:waterfall-item-' + this.props.index);
   }
 
   render () {

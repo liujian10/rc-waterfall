@@ -1,3 +1,3 @@
-import Waterfall from './Waterfall.jsx'
+import Waterfall from './Waterfall'
 
 export default Waterfall

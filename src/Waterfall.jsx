@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import addEventListener from 'rc-util/lib/Dom/addEventListener'
-import Item from './WaterfallItem.jsx'
+import Item from './WaterfallItem'
 import './Waterfall.less'
 
 class Waterfall extends React.Component {
@@ -28,7 +28,7 @@ class Waterfall extends React.Component {
   componentDidMount () {
     const target = this.props.getTarget ? this.getScrollTarget() : window
     this.scrollEvent = addEventListener(target, 'scroll', this.handleScroll.bind(this))
-    this.resizeEvent = addEventListener(window, 'resize', this.adaptiveToUpdate.bind(this))
+    this.resizeEvent = addEventListener(target, 'resize', this.adaptiveToUpdate.bind(this))
     this.adaptiveToUpdate()
   }
 
@@ -41,7 +41,6 @@ class Waterfall extends React.Component {
   }
 
   componentDidUpdate () {
-//    console.log('componentDidUpdate:waterfall')
     if (this.domColumns.length === 0) {
       this.initDomColumns()
     }
@@ -193,7 +192,6 @@ class Waterfall extends React.Component {
         let timer
         img.onload = () => {
           this.imageCaches[nextIndex] = img
-//          console.log('nextIndex height:' + img.height)
           if (nextIndex < this.columnNum && isOnlyImg) {
             this.domColumns[nextIndex] = [img]
           }
