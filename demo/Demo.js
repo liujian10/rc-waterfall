@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'antd'
 
-import Waterfall from '../index'
+import Waterfall from '../src/index'
 
 class Demo extends React.Component {
   render () {

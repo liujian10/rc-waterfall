@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import addEventListener from 'rc-util/lib/Dom/addEventListener'
-import Item from './WaterfallItem'
+import Item from './WaterfallItem.jsx'
 import './Waterfall.less'
 
 class Waterfall extends React.Component {
@@ -41,7 +41,7 @@ class Waterfall extends React.Component {
   }
 
   componentDidUpdate () {
-    console.log('componentDidUpdate:waterfall')
+//    console.log('componentDidUpdate:waterfall')
     if (this.domColumns.length === 0) {
       this.initDomColumns()
     }
@@ -193,7 +193,7 @@ class Waterfall extends React.Component {
         let timer
         img.onload = () => {
           this.imageCaches[nextIndex] = img
-          console.log('nextIndex height:' + img.height)
+//          console.log('nextIndex height:' + img.height)
           if (nextIndex < this.columnNum && isOnlyImg) {
             this.domColumns[nextIndex] = [img]
           }
